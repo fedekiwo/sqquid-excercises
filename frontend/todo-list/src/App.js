@@ -9,7 +9,9 @@ function App() {
       {/* TODO pensar algo copado para esto */}
       <Container>
         <header className="App-header">
-          <img src={logo} alt="logo" />
+          <a href="/">
+            <img src={logo} alt="logo" />
+          </a>
         </header>
       </Container>
       <div>

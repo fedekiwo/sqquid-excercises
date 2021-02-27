@@ -9,6 +9,7 @@ function modifyByIndex(state, currentItem, cb) {
 const useTodoListStore = create((set, get) => ({
   todoList: [],
   transientTodoItem: null,
+  setTodoList: todoList => set({ todoList }),
   addToTodoList: newItem => set({
     todoList: [...get().todoList, newItem],
     transientTodoItem: null

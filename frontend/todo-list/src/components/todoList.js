@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import TodoForm from './TodoForm';
 import List from '@material-ui/core/List';
 import TodoItem from './todoItem';
@@ -34,7 +34,17 @@ function onNewItemChange(setTransientTodoItem) {
 }
 
 function TodoList() {
-  const { todoList, updateTodoItem, deleteTodoItem, addToTodoList, setTransientTodoItem, transientTodoItem } = useTodoListStore();
+  const { todoList, setTodoList, updateTodoItem, deleteTodoItem, addToTodoList, setTransientTodoItem, transientTodoItem } = useTodoListStore();
+
+  useEffect(() => {
+    const todoList = localStorage.getItem("todoList") || JSON.stringify([]);
+    setTodoList(JSON.parse(todoList));
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  });
+
   return (
     <List dense>
       { 
