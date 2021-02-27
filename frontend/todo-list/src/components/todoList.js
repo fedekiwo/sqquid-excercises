@@ -41,7 +41,7 @@ function TodoList() {
     setTodoList(JSON.parse(todoList));
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   });
 
