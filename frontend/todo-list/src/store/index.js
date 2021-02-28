@@ -9,6 +9,10 @@ function modifyByIndex(state, currentItem, cb) {
 const useTodoListStore = create((set, get) => ({
   todoList: [],
   transientTodoItem: null,
+  editModal: { open: false, todoItem: {} },
+  setOpenedModal: todoItem => set({ editModal: { open: true, todoItem, ...todoItem } }),
+  setModalState: modifiedProp => set(state => ({ editModal: { ...state.editModal, ...modifiedProp} })),
+  setClosedModal: () => set({ editModal: { open: false, todoItem: {} } }),
   setTodoList: todoList => set({ todoList }),
   addToTodoList: newItem => set({
     todoList: [...get().todoList, newItem],

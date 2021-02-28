@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import { FormControl, TextField, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, IconButton } from '@material-ui/core';
-
-const color = "#e4e4e4";
+import { FormControl, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, IconButton } from '@material-ui/core';
+import { color } from "../constants";
+import TextField from "./textField";
 
 const useStyles = makeStyles((theme) => ({
   submitButton: {
@@ -28,20 +28,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CustomCssTextFiled = withStyles({
-  root: {
-    '& .MuiInput-underline': {
-      color
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: color,
-    },
-    '& label.Mui-focused': {
-      color
-    },
-  },
-})(TextField);
-
 function AddTodoItem(props) {
   const classes = useStyles();
   const { onSubmit, onChange, title } = props;
@@ -53,7 +39,7 @@ function AddTodoItem(props) {
       </ListItemIcon>
       <ListItemText>
         <FormControl className={classes.formControl}>
-          <CustomCssTextFiled
+          <TextField
             name="title"
             value={title}
             placeholder="What would you like to do next...?" 

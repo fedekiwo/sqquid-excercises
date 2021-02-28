@@ -2,8 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { color } from "../constants";
 
-const color = "#e4e4e4";
 const useStyles = makeStyles((theme) => ({
   "listItemText--checked":{
     color,
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 function TodoItem(props) {
   const classes = useStyles();
 
-  const { title, checked, onCheckBoxChange, onDeleteClick } = props;
+  const { title, checked, onCheckBoxChange, onDeleteClick, onTitleClick } = props;
   return (
     <ListItem button className={`${classes.listItem} ${checked ? classes.checkedBackground : ""}`}>
       <ListItemIcon>
@@ -48,7 +48,11 @@ function TodoItem(props) {
           className={classes["MuiCheckbox-root"]}
         />
       </ListItemIcon>
-      <ListItemText primary={title}  className={classes[`listItemText${checked ? "--checked" : ""}`]} />
+      <ListItemText 
+        primary={title}
+        className={classes[`listItemText${checked ? "--checked" : ""}`]} 
+        onClick={onTitleClick}  
+      />
       <ListItemSecondaryAction>
         <IconButton edge="end" aria-label="comments" className={classes.deleteColor} onClick={onDeleteClick}>
           <DeleteForeverIcon />
