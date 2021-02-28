@@ -1,15 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Dialog from '@material-ui/core/Dialog';
+import { Button, List, ListItem, DialogTitle, DialogContent, DialogActions, Dialog } from '@material-ui/core';
 import { color, background } from "../constants";
 import TextField from "./textField";
+import DescriptionEditMenu from "./descriptionEditMenu";
 
 const CustomCssDialog = withStyles({
   root: {
@@ -47,13 +41,10 @@ export default function EditModal(props) {
             />
           </ListItem>
           <ListItem>
-            <TextareaAutosize
-              placeholder="Complete with a description of your task..."
-              rowsMin={10}
-              value={description}
-              onChange={onChange("description")}
-              style={{ background: "#4b515f", color, width: "100%" }}
-            />
+           <DescriptionEditMenu 
+            onChangeDescription={onChange("description")}
+            description={description}
+           />
           </ListItem>
         </List>
       </DialogContent>

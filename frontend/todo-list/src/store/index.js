@@ -11,7 +11,7 @@ const useTodoListStore = create((set, get) => ({
   transientTodoItem: null,
   editModal: { open: false, todoItem: {} },
   setOpenedModal: todoItem => set({ editModal: { open: true, todoItem, ...todoItem } }),
-  setModalState: modifiedProp => set(state => ({ editModal: { ...state.editModal, ...modifiedProp} })),
+  setModalState: modifiedProp => set(state => ({ editModal: { ...state.editModal, ...modifiedProp } })),
   setClosedModal: () => set({ editModal: { open: false, todoItem: {} } }),
   setTodoList: todoList => set({ todoList }),
   addToTodoList: newItem => set({
