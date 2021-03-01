@@ -13,16 +13,15 @@ function fuzzyMatch(stringForRegex) {
         .map(value => RegExp(stringForRegex, 'i').exec(value))
         .filter(match => match)
         .map(match => ({ length: match[0].length, index: match.index}));
-      
+
       if(matches.length === 0) { return null };
       const bestMatch = matches.sort((match1, match2) => bestMatchSort(match1, match2))[0];
       return { record, ...bestMatch }
-
   }
 }
 
 function stringForRegex(stringToSearch) {
-  return stringToSearch.split('').join('.*');
+  return stringToSearch.split('').filter(char => char != " ").join('.*');
 }
 
 function fuzzySearch(stringToSearch, records) {
