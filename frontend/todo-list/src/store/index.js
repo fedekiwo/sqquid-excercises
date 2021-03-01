@@ -29,7 +29,7 @@ const useTodoListStore = create((set, get) => ({
     });
   },
   setTransientTodoItem: (title) => {
-    set(state => { state.transientTodoItem = { title, checked: false } });
+    set(state => { state.transientTodoItem = { title, checked: false, description: "" } });
   }
 }));
 
