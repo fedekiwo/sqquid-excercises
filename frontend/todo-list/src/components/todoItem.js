@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
+import DescriptionIcon from '@material-ui/icons/Description';
 import { color } from "../constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteColor: {
     color: "#ff8282",
+  },
+  editColor: {
+    color: "#78a2d2",
+  },
+  descriptionColor: {
+    color,
   },
   "MuiCheckbox-root": {
     color
@@ -36,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 function TodoItem(props) {
   const classes = useStyles();
 
-  const { title, checked, onCheckBoxChange, onDeleteClick, onTitleClick } = props;
+  const { title, description, checked, onCheckBoxChange, onDeleteClick, onTitleClick, onDescriptionClick } = props;
   return (
     <ListItem button className={`${classes.listItem} ${checked ? classes.checkedBackground : ""}`}>
       <ListItemIcon>
@@ -48,12 +56,20 @@ function TodoItem(props) {
           className={classes["MuiCheckbox-root"]}
         />
       </ListItemIcon>
-      <ListItemText 
+      <ListItemText
         primary={title}
         className={classes[`listItemText${checked ? "--checked" : ""}`]} 
-        onClick={onTitleClick}  
+        onClick={onTitleClick}
       />
       <ListItemSecondaryAction>
+        {
+          description && <IconButton edge="end" aria-label="comments" className={classes.descriptionColor} onClick={onDescriptionClick}>
+            <DescriptionIcon />
+          </IconButton>
+        }
+        <IconButton edge="end" aria-label="comments" className={classes.editColor} onClick={onTitleClick}>
+          <EditIcon />
+        </IconButton>
         <IconButton edge="end" aria-label="comments" className={classes.deleteColor} onClick={onDeleteClick}>
           <DeleteForeverIcon />
         </IconButton>

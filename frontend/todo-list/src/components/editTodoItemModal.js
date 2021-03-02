@@ -1,25 +1,15 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Button, List, ListItem, DialogTitle, DialogContent, DialogActions, Dialog } from '@material-ui/core';
-import { color, background } from "../constants";
+import { Button, List, ListItem, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import TextField from "./textField";
 import DescriptionEditMenu from "./descriptionEditMenu";
-
-const CustomCssDialog = withStyles({
-  root: {
-    '& .MuiDialog-paper': {
-      color,
-      background
-    }
-  },
-})(Dialog);
+import Dialog from "./dialog"
 
 export default function EditModal(props) {
   const { onCancel, onItemEdition, open, todoItem, title, description, onInputChange, ...other} = props;
   const onChange = prop => input => onInputChange({ [prop]: input.target.value });
 
   return (
-    <CustomCssDialog
+    <Dialog
       disableEscapeKeyDown
       aria-labelledby="edit-modal"
       color="secondary"
@@ -56,6 +46,6 @@ export default function EditModal(props) {
           Save
         </Button>
       </DialogActions>
-    </CustomCssDialog>
+    </Dialog>
   );
 }

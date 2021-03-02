@@ -6,13 +6,19 @@ function modifyByIndex(state, currentItem, cb) {
   cb(index)
 } 
 
+const setOpeneModal = (prop, set) => todoItem => set({ [prop]: { open: true, todoItem, ...todoItem } });
+const setClosedModal = (prop, set) => () => set({ [prop]: { open: false, todoItem: {} } });
+
 const useTodoListStore = create((set, get) => ({
   todoList: [],
   transientTodoItem: null,
   editModal: { open: false, todoItem: {} },
-  setOpenedModal: todoItem => set({ editModal: { open: true, todoItem, ...todoItem } }),
+  previewModal: { open: false, todoItem: {} },
+  setOpenedPreviewModal: setOpeneModal("previewModal", set),
+  setClosedPreviewModal: setClosedModal("previewModal", set),
+  setOpenedModal: setOpeneModal("editModal", set),
   setModalState: modifiedProp => set(state => ({ editModal: { ...state.editModal, ...modifiedProp } })),
-  setClosedModal: () => set({ editModal: { open: false, todoItem: {} } }),
+  setClosedModal: setClosedModal("editModal", set),
   setTodoList: todoList => set({ todoList }),
   addToTodoList: newItem => set({
     todoList: [...get().todoList, newItem],

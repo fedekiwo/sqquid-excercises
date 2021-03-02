@@ -5,6 +5,7 @@ import TodoItem from './todoItem';
 import AddTodoItem from './addTodoItem';
 import { useTodoListStore } from "../store/index";
 import EditModal from "./editTodoItemModal";
+import PreviewModal from "./previewModal";
 
 function onCheckBoxChange(updateTodoItem, todoItem) {
   return () => updateTodoItem(todoItem, { checked: !todoItem.checked });
@@ -26,11 +27,12 @@ function onItemEdition(setClosedModal, updateTodoItem) {
   };
 }
 
-function mapItemWithListeners(updateTodoItem, deleteTodoItem, setOpenedModal) {
+function mapItemWithListeners(updateTodoItem, deleteTodoItem, setOpenedModal, setOpenedPreviewModal) {
   return todoItem => ({
     onCheckBoxChange: onCheckBoxChange(updateTodoItem, todoItem),
     onDeleteClick: onDeleteClick(deleteTodoItem, todoItem),
     onTitleClick: handleOpenModal(setOpenedModal, todoItem),
+    onDescriptionClick: handleOpenModal(setOpenedPreviewModal, todoItem),
     ...todoItem
   });
 }
@@ -58,7 +60,10 @@ function TodoList() {
     setOpenedModal,
     setClosedModal,
     editModal,
-    setModalState
+    setModalState,
+    previewModal,
+    setOpenedPreviewModal,
+    setClosedPreviewModal
   } = useTodoListStore();
 
   useEffect(() => {
@@ -73,7 +78,7 @@ function TodoList() {
   return (
     <List dense>
       { 
-        todoList.map(mapItemWithListeners(updateTodoItem, deleteTodoItem, setOpenedModal))
+        todoList.map(mapItemWithListeners(updateTodoItem, deleteTodoItem, setOpenedModal, setOpenedPreviewModal))
         .map((todoItem, i) => (<TodoItem key={i} editModal={editModal} {...todoItem} />))
       }
       {
@@ -82,6 +87,12 @@ function TodoList() {
           onCancel={setClosedModal}
           onInputChange={setModalState}
           {...editModal}
+        />
+      }
+      {
+        <PreviewModal 
+          onClose={setClosedPreviewModal}
+          {...previewModal}
         />
       }
       {
